@@ -1,4 +1,4 @@
-# React-Ninja_GitHub-App
+# React-Ninja_Boilerplate-React
 
 ### To install dependencies:
 ```sh
