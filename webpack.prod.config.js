@@ -7,16 +7,20 @@ const validate = require('webpack-validator')
 const HtmlPlugin = require('html-webpack-plugin')
 const ExtractTextplugin = require('extract-text-webpack-plugin')
 
+const crp = new ExtractTextplugin('crp.css')
+const styles = new ExtractTextplugin('[name]-[hash].css')
+
 module.exports = validate({
-	entry: path.join(__dirname, 'src', 'index'),
+  entry: path.join(__dirname, 'src', 'index'),
 
-	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: '[name]-[hash].js'
-	},
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name]-[hash].js'
+  },
 
-	plugins: [
-    new ExtractTextplugin('[name]-[hash].css'),
+  plugins: [
+    crp,
+    styles,
 
     new webpack.DefinePlugin({
       'process.env': {
@@ -32,29 +36,35 @@ module.exports = validate({
     new webpack.optimize.OccurrenceOrderPlugin(),
 
     new HtmlPlugin({
-      title: 'React Boilerplate App',
+      title: 'GitHub App',
+      inject: false,
       template: path.join(__dirname, 'src', 'html', 'template.html')
     })
-	],
+  ],
 
-	module: {
-		preLoaders: [{
-			test: /\.js$/,
-			exclude: /node_modules/,
-			include: /src/,
-			loader: 'standard'
-		}],
-
-		loaders: [{
-			test: /\.js$/,
-			exclude: /node_modules/,
-			include: /src/,
-			loader: 'babel'
-		}, {
-      test: /\.css$/,
+  module: {
+    preLoaders: [{
+      test: /\.js$/,
       exclude: /node_modules/,
       include: /src/,
-      loader: ExtractTextplugin.extract('style', 'css')
+      loader: 'standard'
+    }],
+
+    loaders: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      include: /src/,
+      loader: 'babel'
+    }, {
+      test: /\.css$/,
+      exclude: /node_modules|(style|example)\.css/,
+      include: /src/,
+      loader: styles.extract('style', 'css')
+    }, {
+      test: /(style|example)\.css$/,
+      exclude: /node_modules/,
+      include: /src/,
+      loader: crp.extract('style', 'css')
     }]
-	}
+  }
 })
