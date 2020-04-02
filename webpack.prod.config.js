@@ -24,7 +24,7 @@ module.exports = validate({
 
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': '"production"'
+        NODE_ENV: '"production"'
       }
     }),
 
@@ -43,28 +43,41 @@ module.exports = validate({
   ],
 
   module: {
-    preLoaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      include: /src/,
-      loader: 'standard'
-    }],
+    preLoaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        include: /src/,
+        loader: 'standard'
+      }
+    ],
 
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      include: /src/,
-      loader: 'babel'
-    }, {
-      test: /\.css$/,
-      exclude: /node_modules|(style|example)\.css/,
-      include: /src/,
-      loader: styles.extract('style', 'css')
-    }, {
-      test: /(style|example)\.css$/,
-      exclude: /node_modules/,
-      include: /src/,
-      loader: crp.extract('style', 'css')
-    }]
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        include: /src/,
+        loader: 'babel'
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules|(style|example)\.css/,
+        include: /src/,
+        loader: styles.extract('style', 'css')
+      },
+      {
+        test: /(style|example)\.css$/,
+        exclude: /node_modules/,
+        include: /src/,
+        loader: crp.extract('style', 'css')
+      }
+    ]
+  },
+
+  resolve: {
+    alias: {
+      src: path.join(__dirname, 'src'),
+      components: path.join(__dirname, 'src', 'components')
+    }
   }
 })
