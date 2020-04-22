@@ -1,13 +1,11 @@
 'use strict'
 
 const webpack = require('webpack')
-const validate = require('webpack-validator')
-
 const common = require('./common')
 
 const HtmlPlugin = require('html-webpack-plugin')
 
-module.exports = validate({
+module.exports = {
 	devtool: 'source-map',
 
 	entry: [
@@ -27,9 +25,8 @@ module.exports = validate({
 	],
 
 	module: {
-		preLoaders: [common.standardPreLoader],
-		loaders: [common.jsLoader, common.cssLoader]
+    rules: [common.standardPreLoader, common.jsLoader, common.cssLoader]
   },
   
   resolve: common.resolve
-})
+}
