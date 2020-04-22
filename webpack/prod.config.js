@@ -43,7 +43,7 @@ module.exports = {
         test: /\.css$/,
         exclude: /node_modules|(search|style)\.css/,
         include: /src/,
-        use: styles.extract.apply({
+        use: styles.extract({
           fallback: common.cssLoader.use[0],
           use: common.cssLoader.use.slice(1)
         })
@@ -52,7 +52,7 @@ module.exports = {
         test: /(search|style)\.css$/,
         exclude: /node_modules/,
         include: /src/,
-        use: crp.extract.apply({
+        use: crp.extract({
           fallback: common.cssLoader.use[0],
           use: common.cssLoader.use.slice(1)
         })
