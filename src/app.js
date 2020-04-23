@@ -1,15 +1,19 @@
 'use strict'
 
-import React from 'react'
+import React, { Component } from 'react'
+import './css/style.css'
 
 class App extends Component {
   constructor () {
     super()
+    this.state = {
+      title: 'My React App'
+    }
   }
 
   render () {
     return (
-      <div>React App</div>
+    <div>{this.state.title}</div>
     )
   }
 }
