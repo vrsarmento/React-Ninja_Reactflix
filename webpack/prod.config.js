@@ -1,10 +1,12 @@
 'use strict'
 
+const { join } = require('path')
 const webpack = require('webpack')
 const common = require('./common')
 
 const HtmlPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CleanPlugin = require('clean-webpack-plugin')
 
 const crp = new ExtractTextPlugin({
   filename: 'crp.css'
@@ -18,6 +20,10 @@ module.exports = {
   output: common.output,
 
   plugins: [
+    new CleanPlugin(['dist'], {
+      root: join(__dirname, '..')
+    }),
+    
     crp,
     styles,
 
