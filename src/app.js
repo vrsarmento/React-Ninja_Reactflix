@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
+import Example from 'components/example'
 import './css/style.css'
 
 class App extends Component {
@@ -13,7 +14,7 @@ class App extends Component {
 
   render () {
     return (
-    <div>{this.state.title}</div>
+    <Example>{this.state.title}</Example>
     )
   }
 }
