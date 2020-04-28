@@ -13,7 +13,7 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     // Dynamic import example - Another way to code splitting 
     const title = await import('components/example')
     this.setState({
