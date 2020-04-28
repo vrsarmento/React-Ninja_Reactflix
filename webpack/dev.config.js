@@ -26,7 +26,13 @@ module.exports = {
 	],
 
 	module: {
-    rules: [common.standardPreLoader, common.jsLoader, common.cssLoader]
+    rules: [
+      common.standardPreLoader,
+      common.jsLoader,
+      common.cssLoader,
+      common.fileLoader,
+      common.urlLoader
+    ]
   },
   
   resolve: common.resolve

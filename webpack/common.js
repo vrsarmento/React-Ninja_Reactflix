@@ -31,9 +31,9 @@ module.exports = {
     use: {
       loader: 'standard-loader',
       options: {
-        parser: 'babel-eslint'
-      }
-    }
+        parser: 'babel-eslint',
+      },
+    },
   },
 
   jsLoader: {
@@ -48,6 +48,29 @@ module.exports = {
     exclude: /node_modules/,
     include: paths.src,
     use: ['style-loader', 'css-loader'],
+  },
+
+  fileLoader: {
+    test: /\.(jpg|jpeg|svg|png|ico|gif|eot|webp|ttf|woff|woff2|txt)(\?.*)?$/,
+    include: paths.src,
+    use: {
+      loader: 'file-loader',
+      query: {
+        name: 'media/[name].[hash:8].[ext]',
+      },
+    },
+  },
+
+  urlLoader: {
+    test: /\.(mp4|webm|wav|mp3|m4a|aac|oga)(\?.*)?$/,
+    include: paths.src,
+    use: {
+      loader: 'url-loader',
+      query: {
+        limit: 10000,
+        name: 'media/[name].[hash:8].[ext]',
+      },
+    },
   },
 
   resolve: {

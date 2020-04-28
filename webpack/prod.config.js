@@ -51,7 +51,9 @@ module.exports = {
   module: {
     rules: [
       common.standardPreLoader,
-      common.jsLoader, 
+      common.jsLoader,
+      common.fileLoader,
+      common.urlLoader,
       {
         test: /\.css$/,
         exclude: /node_modules|(search|style)\.css/,
