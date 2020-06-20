@@ -11,7 +11,9 @@ const paths = {
 module.exports = {
   paths,
 
-  entry: join(paths.src, 'index'),
+  entry: {
+    main: join(paths.src, 'index'),
+  },
 
   output: {
     path: paths.dist,
@@ -19,14 +21,13 @@ module.exports = {
   },
 
   htmlPluginConfig: (template) => ({
-    title: 'GitHub App',
+    title: 'App',
     template: join(paths.src, 'html', template),
   }),
 
   standardPreLoader: {
-    test: /\.js$/,
     enforce: 'pre',
-    exclude: /node_modules/,
+    test: /\.js$/,
     include: paths.src,
     use: {
       loader: 'standard-loader',
@@ -38,15 +39,15 @@ module.exports = {
 
   jsLoader: {
     test: /\.js$/,
-    exclude: /node_modules/,
     include: paths.src,
-    use: 'babel-loader',
+    use: 'babel-loader'
   },
 
   cssLoader: {
     test: /\.css$/,
-    exclude: /node_modules/,
-    include: paths.src,
+    include: [
+      paths.src,
+    ],
     use: ['style-loader', 'css-loader'],
   },
 
@@ -55,7 +56,7 @@ module.exports = {
     include: paths.src,
     use: {
       loader: 'file-loader',
-      query: {
+      options: {
         name: 'media/[name].[hash:8].[ext]',
       },
     },
@@ -66,7 +67,7 @@ module.exports = {
     include: paths.src,
     use: {
       loader: 'url-loader',
-      query: {
+      options: {
         limit: 10000,
         name: 'media/[name].[hash:8].[ext]',
       },
@@ -78,6 +79,7 @@ module.exports = {
       src: paths.src,
       components: join(paths.src, 'components'),
       utils: join(paths.src, 'utils'),
+      views: join(paths.src, 'views')
     },
   },
 }
