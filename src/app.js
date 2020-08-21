@@ -1,8 +1,10 @@
 'use strict'
 
 import React, { Component } from 'react'
-// import Example from 'components/example'
-import './css/style.css'
+
+import 'normalize.css'
+import 'milligram'
+// import './css/style.css'
 
 class App extends Component {
   constructor () {
