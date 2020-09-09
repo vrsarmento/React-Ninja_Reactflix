@@ -1,6 +1,6 @@
 'use strict'
 
-import { db } from './config/firebase'
+import { db } from 'config/firebase'
 
 // Read
 const videos = db.ref('videos')
