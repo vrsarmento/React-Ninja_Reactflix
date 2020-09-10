@@ -13,7 +13,8 @@ import 'milligram'
 const App = () => (
   <Container>
     <Header>
-      <h1>Reactflix</h1>
+      <HeaderTitle>Reactflix</HeaderTitle>
+      <RegisterButton>Cadastrar vídeo</RegisterButton>
     </Header>
 
     <Main>
@@ -45,6 +46,20 @@ const Container = styled.div`
 const Header = styled.header`
   height: ${headerHeight};
   background: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+`
+
+const HeaderTitle = styled.h1`
+  color: #fff;
+  font-weight: bolder;
+  margin-bottom: 0;
+`
+
+const RegisterButton = styled.button`
+  margin-bottom: 0;
 `
 
 const Main = styled.main`
