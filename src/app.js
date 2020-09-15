@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react'
+import { connect } from 'react-redux'
 import styled, { injectGlobal } from 'styled-components'
 import Header from 'components/header'
 import Footer from 'components/footer'
@@ -13,18 +14,17 @@ import 'normalize.css'
 import 'milligram'
 // import './css/style.css'
 
-const App = () => (
+const App = ({ isRegisterVideoOpened }) => (
   <Container>
     <Header />
 
     <Main>
-      <RegisterVideo />
+      {isRegisterVideoOpened && <RegisterVideo />}
       <VideoSingle />
       <VideosList />
     </Main>
 
     <Footer />
-
   </Container>
 )
 
@@ -42,4 +42,8 @@ const Main = styled.main`
   min-height: calc(100% - ${headerHeight} - ${footerHeight});
 `
 
-export default App
+const mapStateToProps = (state) => ({
+  isRegisterVideoOpened: state.ui.isRegisterVideoOpened
+})
+
+export default connect(mapStateToProps)(App)
