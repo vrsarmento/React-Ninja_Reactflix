@@ -1,6 +1,6 @@
 'use strict'
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import styled, { injectGlobal } from 'styled-components'
 import Header from 'components/header'
@@ -9,24 +9,35 @@ import VideosList from 'components/videos-list'
 import VideoSingle from 'components/video-single'
 import RegisterVideo from 'components/register-video'
 import { headerHeight, footerHeight } from 'utils/constants'
+import { fetchVideos } from 'reducers/videos/action-creators'
 
 import 'normalize.css'
 import 'milligram'
 // import './css/style.css'
 
-const App = ({ isRegisterVideoOpened }) => (
-  <Container>
-    <Header />
+class App extends PureComponent {
+  componentDidMount () {
+    this.props.fetchVideos()
+  }
 
-    <Main>
-      {isRegisterVideoOpened && <RegisterVideo />}
-      <VideoSingle />
-      <VideosList />
-    </Main>
+  render () {
+    const { isRegisterVideoOpened } = this.props
 
-    <Footer />
-  </Container>
-)
+    return (
+      <Container>
+        <Header />
+
+        <Main>
+          {isRegisterVideoOpened && <RegisterVideo />}
+          <VideoSingle />
+          <VideosList />
+        </Main>
+
+        <Footer />
+      </Container>
+    )
+  }
+}
 
 injectGlobal`
   html, body, div[data-js="app"] {
@@ -46,4 +57,8 @@ const mapStateToProps = (state) => ({
   isRegisterVideoOpened: state.ui.isRegisterVideoOpened
 })
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = {
+  fetchVideos
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
