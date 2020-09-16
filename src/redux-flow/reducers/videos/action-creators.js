@@ -15,7 +15,6 @@ export const addVideo = ({ id, title }) => ({
 
 export const fetchVideos = () => (dispatch) => {
   db.ref('videos').on('value', (snapshot) => {
-    console.log('snapshot: ', snapshot.val())
     snapshot.forEach((child) => {
       dispatch(addVideo(child.val()))
     })
