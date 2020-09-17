@@ -4,15 +4,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import PlayIcon from 'components/play'
+import { selectVideoSingle } from 'reducers/video-single/action-creators'
 
-const VideosList = ({ videos }) => (
+const VideosList = ({ videos, handleClick }) => (
   <Container>
     {Object.keys(videos).map((id) => (
       <Video key={id}>
-        <VideoThumb>
-          <PlayIconStyled />
-        </VideoThumb>
-        <VideoTitle>{videos[id].title}</VideoTitle>
+        <VideoLink href={id} onClick={handleClick(id)}>
+          <VideoThumb>
+            <PlayIconStyled />
+          </VideoThumb>
+          <VideoTitle>{videos[id].title}</VideoTitle>
+        </VideoLink>
       </Video>
     ))}
   </Container>
@@ -44,6 +47,10 @@ const Container = styled.div`
   }
 `
 
+const VideoLink = styled.a`
+  color: inherit;
+`
+
 const VideoThumb = styled.div`
   border: 1px solid #999;
   height: 150px;
@@ -60,4 +67,11 @@ const mapStateToProps = (state) => ({
   videos: state.videos
 })
 
-export default connect(mapStateToProps)(VideosList)
+const mapDispatchToProps = (dispatch) => ({
+  handleClick: (id) => (e) => {
+    e.preventDefault()
+    dispatch(selectVideoSingle(id))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(VideosList)
